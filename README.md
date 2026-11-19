@@ -1,27 +1,35 @@
-Ninjas
-======
-A Micro PHP Framework
----------------------
+# Ninjas
 
-A really simple micro PHP framework I started building, mostly because I wanted something that had zero overhead.
+A tiny PHP framework I started building for the boilerplate bits of a site, mostly because I wanted something with zero overhead. I think I mostly made it so I could give all the classes ninja names.
 
-Implementation is simple:
+Status: archived. Written in 2010 and pushed in 2011. Not maintained.
 
-	<?php
+## Running it
 
-	include('../ninjas/Ninjas.php');	
-	$n = new Ninjas();
+Fill in `Config.php`, then include the framework in your page:
 
-	$n->wind->connect();
-	if($n->wind->getConnected()):
-		$query = "SELECT * FROM AWESOME";
-		$result = mysql_query($query);	
-		$n->wind->disconnect();
-	endif;
+```php
+<?php
+include('../ninjas/Ninjas.php');
+$n = new Ninjas();
 
-	?>
+$n->wind->connect();
+if ($n->wind->getConnected()):
+  $result = mysql_query("SELECT * FROM AWESOME");
+  $n->wind->disconnect();
+endif;
+?>
+```
 
-I think I mostly made this so I could make all the ninja class name references.
+It uses the old `mysql_*` functions, which were removed in PHP 7, so it needs PHP 5.
 
-Charlie Gleason
-<hi@charliegleason.com>
+## How it works
+
+`Ninjas.php` creates one object for each class in `core/`:
+
+- `Dojo` handles page details like the title and description.
+- `Wind` connects to a MySQL database.
+- `Forest` embeds social media widgets.
+- `Medic` sends logs by email.
+- `Sky` sets up magic getters and setters.
+- `Training` turns error reporting on and off.
